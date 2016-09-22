@@ -30,34 +30,44 @@ function fn_ok(rta) {
 
 	mapa.addListener('click', function(e) { //inicio de click
    		 
-
-		var objConfDR = { 
-			map: mapa,
-			suppressMarkers: true
-		}
-		var destino = new google.maps.LatLng(-12.066235471981807, -75.20984351634979);
+   		 //Aqui pegas waypoingts ()
+   		 medir();
 		
-		var objConfDS = {
-			origin:posicion,
-			destination: destino,
-			travelMode: google.maps.TravelMode.WALKING
-		}
-
-		var ds = new google.maps.DirectionsService();
-
-		var dr = new google.maps.DirectionsRenderer(objConfDR);
-
-		ds.route(objConfDS, fn_rutear);
-
-		function fn_rutear(resultado, status) {
-			if (status=='OK') {
-				dr.setDirections(resultado);
-			}else{
-				console.log('error al trazar ruta');
-			}
-		}
-
 
   	});// fin de click
 
+}
+
+
+function medir() {
+	var capillas={ 
+			libertad : new google.maps.LatLng(-12.066235471981807, -75.20984351634979),
+			central : new google.maps.LatLng(-12.071019690031068, -75.21696746349335),	
+			sancarlos : new google.maps.LatLng(-12.053267293663202, -75.19913613796234),	
+			florida : new google.maps.LatLng (-12.066854487600306, -75.22723495960236),
+			chilca : new google.maps.LatLng(-12.076370358674138,  -75.1973444223404),
+			esquinas : new google.maps.LatLng(-12.053036463452461, -75.21278321743011),
+			mantaro : new google.maps.LatLng(-12.049783825802876, -75.22720277309418),
+			pilcomayo : new google.maps.LatLng(-12.055533623023129, -75.2604728937149),
+			chupaca : new google.maps.LatLng(-12.062605284758021, -75.28371155261993),
+			manti : new google.maps.LatLng(-12.022773870051635, -75.23734420537949)
+		}
+		
+
+		var origen = new google.maps.LatLng(-12.766237571981114, -75.10983351634754);
+	
+	
+		var med=500000000.5;
+
+		for (var i in capillas) {
+ 			var med_aux = google.maps.geometry.spherical.computeDistanceBetween( origen, capillas[i] );
+ 			console.log(med_aux);
+
+ 			if (med_aux < med) {
+ 				med = med_aux;
+ 				var fin =  capillas[i];
+ 				
+ 			};
+		};
+		console.log('este es :'+med);
 }
