@@ -34,14 +34,17 @@ function fn_ok(rta) {
 
    		 	
    		 	//obteniendo posicion del click
-   		 	var latitud = e.latLng.lat();
-			var longitud = e.latLng.lng();
+   		 	var latitudx = e.latLng.lat();
+			var longitudx = e.latLng.lng();
 					
 			//Puedo unirlas en una unica variable si asi lo prefiero
 			var coordenadas = e.latLng.lat() + ", " + e.latLng.lng();
 					
 			//Las muestro con un popup
-			alert(coordenadas);
+			console.log(coordenadas);
+
+			medir(latitudx,longitudx);
+
 				
 
   	});// fin de click
@@ -49,7 +52,7 @@ function fn_ok(rta) {
 }
 
 
-function medir() {
+function medir(latx,lony) {
 	var capillas={ 
 			libertad : new google.maps.LatLng(-12.066235471981807, -75.20984351634979),
 			central : new google.maps.LatLng(-12.071019690031068, -75.21696746349335),	
@@ -64,8 +67,9 @@ function medir() {
 		}
 		
 
-		var origen = new google.maps.LatLng(-12.064387335184453, -75.21268799901009);
-	
+		//var origen = new google.maps.LatLng(-12.064387335184453, -75.21268799901009);
+
+		var origen = new google.maps.LatLng(latx,lony);
 	
 		var med=500000000.5;
 
@@ -79,6 +83,6 @@ function medir() {
  				
  			};
 		};
-		console.log('este es :'+med);
+		console.log('este es :'+med+' metros');
 }
 
