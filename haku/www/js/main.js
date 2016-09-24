@@ -31,8 +31,18 @@ function fn_ok(rta) {
 	mapa.addListener('click', function(e) { //inicio de click
    		 
    		 //Aqui pegas waypoingts ()
-   		 medir();
-		
+
+   		 	
+   		 	//obteniendo posicion del click
+   		 	var latitud = e.latLng.lat();
+			var longitud = e.latLng.lng();
+					
+			//Puedo unirlas en una unica variable si asi lo prefiero
+			var coordenadas = e.latLng.lat() + ", " + e.latLng.lng();
+					
+			//Las muestro con un popup
+			alert(coordenadas);
+				
 
   	});// fin de click
 
@@ -54,7 +64,7 @@ function medir() {
 		}
 		
 
-		var origen = new google.maps.LatLng(-12.766237571981114, -75.10983351634754);
+		var origen = new google.maps.LatLng(-12.064387335184453, -75.21268799901009);
 	
 	
 		var med=500000000.5;
@@ -71,3 +81,4 @@ function medir() {
 		};
 		console.log('este es :'+med);
 }
+
