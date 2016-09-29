@@ -73,20 +73,30 @@ function medir(latx,lony) {
 
 		var origen = new google.maps.LatLng(latx,lony);
 	
-		var med=500000000.5;
+		var med1=500000000.5;
+		var med2=500000000.5;
+		var med3=500000000.5;
+		var medx;
+		var medf;
+
+		var nomb_a;
+		var nomb_b;
+		var nomb_c;
+		var nomb_d;
+		var nomb_e;
 
 		for (var i in capillas) {
  			var med_aux = google.maps.geometry.spherical.computeDistanceBetween( origen, capillas[i] );
  			//console.log(med_aux);
 
- 			if (med_aux < med) {
- 				med = med_aux;
- 				var fin =  capillas[i];
+ 			if (med_aux < med1) {
+ 				med1 = med_aux;
+ 				
  				
  			};
 		};
 		//console.log('este es :'+med+' metros');
-			var y = 0;
+			
 
 		for (var x in rutas) {
 
@@ -94,15 +104,12 @@ function medir(latx,lony) {
 			//console.log(rutas[x].inicio);
 			//console.log(rutas[x].final);
 			//console.log(rutas[x].waypts);
-
+			
 			//-- inicio_r toma las coordenadas de los inicio de json rutas y crea un objeto de google
 			var inicio_r = new google.maps.LatLng(rutas[x].inicio.lat,rutas[x].inicio.lng);
 
 			//-- final_r toma las coordenadas de los final de json rutas y crea un objeto de google
 			var final_r = new google.maps.LatLng(rutas[x].final.lat,rutas[x].final.lng);
-
-			//-- waypts_r toma las coordenadas de los waypoints de json rutas
-			//waypts_r = rutas[x].waypts[0].location;
 
 			//medida_inicio: mide la distancia de inicio y las coordenadas obtenidas
 			var medida_inicio = google.maps.geometry.spherical.computeDistanceBetween(inicio_r, coordgeo);
@@ -110,21 +117,47 @@ function medir(latx,lony) {
 			//-- medida_final: mide la distancia de final y las coordenadas obtenidas
 			var medida_final = google.maps.geometry.spherical.computeDistanceBetween(final_r, coordgeo);
 
-			//var medida_waypts = google.maps.geometry.spherical.computeDistanceBetween()
 			
-		
+			if (medida_inicio < med1) {
+				med1 = medida_inicio;
+
+			}
+			if (medida_final < med2) {
+				med2 = medida_inicio;
+			}
+
+			if (med1<med2) {
+				medx = med1;
+			} else if (med2 < med1) {
+				medx = med2;
+			}
+			
 
 			for (var z in rutas[x].waypts) {
+
 				var waypts_r = rutas[x].waypts[z].location;
 
-				console.log(waypts_r);
+				var medida_waypts = google.maps.geometry.spherical.computeDistanceBetween(waypts_r, coordgeo)
+
+				//console.log(medida_waypts);
+				if (medida_waypts < med3) {
+					med3 = medida_waypts;
+				}
 				
 			}
+			
 
 		}
 
+		if (medx<med3) {
+				medf = medx;
+		} else if (med3 < medx) {
+				medf = med3;
+		};
+		console.log(medf);
 		
-}
+};
+
 
 //Json rutas
 var rutas ={
@@ -132,11 +165,11 @@ var rutas ={
 					inicio: {lat: -12.047208967661641, lng: -75.19922867417336},
 					final: {lat: -12.06861605050217, lng: -75.21021097898483},
 					waypts: [
-								{location: 'ucci 1'},
-								{location: 'ucci 2'},
-								{location: 'ucci 3'},
-								{location: 'ucci 4'},
-								{location: 'ucci 5'}
+								{location: new google.maps.LatLng(-12.051727018076974,-75.20204901695251)},
+								{location: new google.maps.LatLng(-12.05703610331996,-75.20507454872131)},
+								{location: new google.maps.LatLng(-12.060895092338846,-75.20760118961334)},
+								{location: new google.maps.LatLng(-12.065919668405291,-75.20520597696304)},
+								{location: new google.maps.LatLng(-12.067400058721029,-75.20796597003937)}
 							]
 					  },// fin 
 
@@ -144,25 +177,28 @@ var rutas ={
 					inicio: {lat: -12.04297624253849, lng: -75.22020220756531},
 					final: {lat: -12.071041722159718, lng: -75.20458236336708},
 					waypts: [
-								{location: 'umuto 1'},
-								{location: 'umuto 2'},
-								{location: 'umuto 3'},
-								{location: 'umuto 4'},
-								{location: 'umuto 5'},
-								{location: 'umuto 6'},
-								{location: 'umuto 7'}
+								{location: new google.maps.LatLng(-12.045765190017212,-75.21754682064056)},
+								{location: new google.maps.LatLng(-12.05122128649754,-75.21463930606842)},
+								{location: new google.maps.LatLng(-12.056289061675328,-75.21277248859406)},
+								{location: new google.maps.LatLng(-12.059598277523511,-75.21204024553299)},
+								{location: new google.maps.LatLng(-12.05923682578966,-75.21102704107761)},
+								{location: new google.maps.LatLng(-12.06387060983608,-75.20765617489815)},
+								{location: new google.maps.LatLng(-12.06822261122515,-75.2053239941597)}
 							]
 					  },// fin 
 
-				uncp: {//inicio
-					inicio: {lat: -12.047208967661641, lng: -75.19922867417336},
-					final: {lat: -12.06861605050217, lng: -75.21021097898483},
+				upla: {//inicio
+					inicio: {lat: -12.039636392262452, lng: -75.19255667924881},
+					final: {lat: -12.069895511165358, lng: -75.2126906812191},
 					waypts: [
-								{location: 'uncp 1'},
-								{location: 'uncp 2'},
-								{location: 'uncp 3'},
-								{location: 'uncp 4'},
-								{location: 'uncp 5'}
+								{location: new google.maps.LatLng(-12.043467300749152,-75.19378244876862)},
+								{location: new google.maps.LatLng(-12.050612727367389,-75.19740879535675)},
+								{location: new google.maps.LatLng(-12.057096958990918,-75.20339548587799)},
+								{location: new google.maps.LatLng(-12.059078920086206,-75.20272225141525)},
+								{location: new google.maps.LatLng(-12.060259276443654,-75.20300656557083)},
+								{location: new google.maps.LatLng(-12.063684903153375,-75.20156353712082)},
+								{location: new google.maps.LatLng(-12.06633094724462,-75.20606562495232)},
+								{location: new google.maps.LatLng(-12.068557821653664,-75.21020159125328)}
 							]
 					  }// fin 
 
