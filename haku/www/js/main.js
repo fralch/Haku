@@ -1,4 +1,5 @@
 var obj= navigator.geolocation.getCurrentPosition(fn_ok, fn_mal);
+var coordgeo;
 
 function fn_mal() {
 	console.log("algo salio mal");
@@ -39,6 +40,7 @@ function fn_ok(rta) {
 					
 			//Puedo unirlas en una unica variable si asi lo prefiero
 			var coordenadas = e.latLng.lat() + ", " + e.latLng.lng();
+			coordgeo = new google.maps.LatLng(e.latLng.lat(), e.latLng.lng());
 					
 			//Las muestro con un popup
 			console.log(coordenadas);
@@ -84,20 +86,85 @@ function medir(latx,lony) {
  			};
 		};
 		//console.log('este es :'+med+' metros');
-		console.log(rutas.ucci.waypts[0].location)
+			var y = 0;
+
+		for (var x in rutas) {
+
+
+			//console.log(rutas[x].inicio);
+			//console.log(rutas[x].final);
+			//console.log(rutas[x].waypts);
+
+			//-- inicio_r toma las coordenadas de los inicio de json rutas y crea un objeto de google
+			var inicio_r = new google.maps.LatLng(rutas[x].inicio.lat,rutas[x].inicio.lng);
+
+			//-- final_r toma las coordenadas de los final de json rutas y crea un objeto de google
+			var final_r = new google.maps.LatLng(rutas[x].final.lat,rutas[x].final.lng);
+
+			//-- waypts_r toma las coordenadas de los waypoints de json rutas
+			//waypts_r = rutas[x].waypts[0].location;
+
+			//medida_inicio: mide la distancia de inicio y las coordenadas obtenidas
+			var medida_inicio = google.maps.geometry.spherical.computeDistanceBetween(inicio_r, coordgeo);
+
+			//-- medida_final: mide la distancia de final y las coordenadas obtenidas
+			var medida_final = google.maps.geometry.spherical.computeDistanceBetween(final_r, coordgeo);
+
+			//var medida_waypts = google.maps.geometry.spherical.computeDistanceBetween()
+			
+		
+
+			for (var z in rutas[x].waypts) {
+				var waypts_r = rutas[x].waypts[z].location;
+
+				console.log(waypts_r);
+				
+			}
+
+		}
+
 		
 }
 
-var rutas = {
-				ucci: {
+//Json rutas
+var rutas ={
+				ucci: {//inicio
 					inicio: {lat: -12.047208967661641, lng: -75.19922867417336},
 					final: {lat: -12.06861605050217, lng: -75.21021097898483},
 					waypts: [
-								{location: new google.maps.LatLng(-12.051727018076974,-75.20204901695251)},
-								{location: new google.maps.LatLng(-12.05703610331996,-75.20507454872131)},
-								{location: new google.maps.LatLng(-12.060895092338846,-75.20760118961334)},
-								{location: new google.maps.LatLng(-12.065919668405291,-75.20520597696304)},
-								{location: new google.maps.LatLng(-12.067400058721029,-75.20796597003937)}
+								{location: 'ucci 1'},
+								{location: 'ucci 2'},
+								{location: 'ucci 3'},
+								{location: 'ucci 4'},
+								{location: 'ucci 5'}
 							]
-					  } 
+					  },// fin 
+
+				umuto: {//inicio
+					inicio: {lat: -12.04297624253849, lng: -75.22020220756531},
+					final: {lat: -12.071041722159718, lng: -75.20458236336708},
+					waypts: [
+								{location: 'umuto 1'},
+								{location: 'umuto 2'},
+								{location: 'umuto 3'},
+								{location: 'umuto 4'},
+								{location: 'umuto 5'},
+								{location: 'umuto 6'},
+								{location: 'umuto 7'}
+							]
+					  },// fin 
+
+				uncp: {//inicio
+					inicio: {lat: -12.047208967661641, lng: -75.19922867417336},
+					final: {lat: -12.06861605050217, lng: -75.21021097898483},
+					waypts: [
+								{location: 'uncp 1'},
+								{location: 'uncp 2'},
+								{location: 'uncp 3'},
+								{location: 'uncp 4'},
+								{location: 'uncp 5'}
+							]
+					  }// fin 
+
+
 }
