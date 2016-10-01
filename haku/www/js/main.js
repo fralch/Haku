@@ -20,7 +20,7 @@ function fn_ok(rta) {
 
 	var opcionesMapa = {
 		center: posicion,
-		zoom: 18
+		zoom: 16
 	}
 	var mapa= new google.maps.Map(document.getElementById('mapa'),opcionesMapa);
 
@@ -78,24 +78,34 @@ function medir(latx,lony) {
 		var med3=500000000.5;
 		var medx;
 		var medf;
+		var band1;
+		var band2;
 
 		var nomb_a;
 		var nomb_b;
 		var nomb_c;
 		var nomb_d;
 		var nomb_e;
+		var nomb_x;
+		var nomb_y;
 
+		/*
 		for (var i in capillas) {
  			var med_aux = google.maps.geometry.spherical.computeDistanceBetween( origen, capillas[i] );
  			//console.log(med_aux);
 
  			if (med_aux < med1) {
  				med1 = med_aux;
- 				
+ 				band1 = capillas[i];
  				
  			};
-		};
-		//console.log('este es :'+med+' metros');
+		};*/
+
+
+
+
+		//console.log('este es :'+med1+' metros');
+		//console.log(band1)
 			
 
 		for (var x in rutas) {
@@ -113,23 +123,35 @@ function medir(latx,lony) {
 
 			//medida_inicio: mide la distancia de inicio y las coordenadas obtenidas
 			var medida_inicio = google.maps.geometry.spherical.computeDistanceBetween(inicio_r, coordgeo);
-
+			//console.log(medida_inicio);
+			
 			//-- medida_final: mide la distancia de final y las coordenadas obtenidas
 			var medida_final = google.maps.geometry.spherical.computeDistanceBetween(final_r, coordgeo);
+			//console.log(medida_final);
 
+			//console.log('esto es '+x);
+			var lugar = x;
 			
 			if (medida_inicio < med1) {
 				med1 = medida_inicio;
+				nomb_a = lugar;
 
 			}
+			
+			//console.log('la medida menor es '+med1);
+
 			if (medida_final < med2) {
-				med2 = medida_inicio;
+				med2 = medida_final;
+				nomb_b = lugar;
 			}
+			//console.log('la medida menor es '+med2);
 
 			if (med1<med2) {
 				medx = med1;
+				nomb_c = lugar;
 			} else if (med2 < med1) {
 				medx = med2;
+				nomb_d = lugar;
 			}
 			
 
@@ -139,22 +161,29 @@ function medir(latx,lony) {
 
 				var medida_waypts = google.maps.geometry.spherical.computeDistanceBetween(waypts_r, coordgeo)
 
+				var lugarway = x;
 				//console.log(medida_waypts);
 				if (medida_waypts < med3) {
 					med3 = medida_waypts;
+					nomb_e = lugarway;
 				}
 				
 			}
 			
 
 		}
+		console.log(nomb_a);
+		console.log(nomb_b);
+		console.log(nomb_c);
+		console.log(nomb_d);
+		console.log(nomb_e);
 
 		if (medx<med3) {
 				medf = medx;
 		} else if (med3 < medx) {
 				medf = med3;
 		};
-		console.log(medf);
+		//console.log(medf);
 		
 };
 
