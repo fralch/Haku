@@ -1,5 +1,6 @@
 var obj= navigator.geolocation.getCurrentPosition(fn_ok, fn_mal);
 var coordgeo;
+var b1 = 1;
 
 function fn_mal() {
 	console.log("algo salio mal");
@@ -31,8 +32,12 @@ function fn_ok(rta) {
 
 	mapa.addListener('click', function(e) { //inicio de click
    		 
+   		 localStorage.removeItem('nombre_1');
+   		 localStorage.removeItem('nombre_2');
+   		 localStorage.removeItem('nombre_3');
+   		 localStorage.removeItem('nombre_4');
    		 //Aqui pegas waypoingts ()
-
+   		 
    		 	
    		 	//obteniendo posicion del click
    		 	var latitudx = e.latLng.lat();
@@ -47,7 +52,142 @@ function fn_ok(rta) {
 
 			medir(latitudx,longitudx);
 
-				
+				//-----------------
+			
+			var i4 = (localStorage.getItem('nombre_1'));
+			var i3 = (localStorage.getItem('nombre_2'));
+			var i2 = (localStorage.getItem('nombre_3'));
+			var i1 = (localStorage.getItem('nombre_4'));
+			
+			
+				if (b1 == 1) {
+					console.log('del local es '+i1);
+
+					var objConfDR = { 
+					map: mapa,
+					suppressMarkers: true
+					}
+					var destino = rutas[i1].final;
+					
+					var objConfDS = {
+						origin:rutas[i1].inicio,
+						destination: destino,
+						waypoints:rutas[i1].waypts,
+						travelMode: google.maps.TravelMode.WALKING
+					}
+
+					var ds = new google.maps.DirectionsService();
+
+					var dr = new google.maps.DirectionsRenderer(objConfDR);
+
+					ds.route(objConfDS, fn_rutear);
+
+					function fn_rutear(resultado, status) {
+						if (status=='OK') {
+							dr.setDirections(resultado);
+						}else{
+							console.log('error al trazar ruta');
+						}
+					}
+				}
+
+				if (b1 == 2) {
+					console.log('del local es '+i2);
+
+					var objConfDR = { 
+					map: mapa,
+					suppressMarkers: true
+					}
+					var destino = rutas[i2].final;
+					
+					var objConfDS = {
+						origin:rutas[i2].inicio,
+						destination: destino,
+						waypoints:rutas[i2].waypts,
+						travelMode: google.maps.TravelMode.WALKING
+					}
+
+					var ds = new google.maps.DirectionsService();
+
+					var dr = new google.maps.DirectionsRenderer(objConfDR);
+
+					ds.route(objConfDS, fn_rutear);
+
+					function fn_rutear(resultado, status) {
+						if (status=='OK') {
+							dr.setDirections(resultado);
+						}else{
+							console.log('error al trazar ruta');
+						}
+					}
+				}
+				if (b1 == 3) {
+					console.log('del local es '+i3);
+
+					var objConfDR = { 
+					map: mapa,
+					suppressMarkers: true
+					}
+					var destino = rutas[i3].final;
+					
+					var objConfDS = {
+						origin:rutas[i3].inicio,
+						destination: destino,
+						waypoints:rutas[i3].waypts,
+						travelMode: google.maps.TravelMode.WALKING
+					}
+
+					var ds = new google.maps.DirectionsService();
+
+					var dr = new google.maps.DirectionsRenderer(objConfDR);
+
+					ds.route(objConfDS, fn_rutear);
+
+					function fn_rutear(resultado, status) {
+						if (status=='OK') {
+							dr.setDirections(resultado);
+						}else{
+							console.log('error al trazar ruta');
+						}
+					}
+				}
+
+				if (b1 == 4) {
+					console.log('del local es '+i4);
+
+					var objConfDR = { 
+					map: mapa,
+					suppressMarkers: true
+					}
+					var destino = rutas[i4].final;
+					
+					var objConfDS = {
+						origin:rutas[i4].inicio,
+						destination: destino,
+						waypoints:rutas[i4].waypts,
+						travelMode: google.maps.TravelMode.WALKING
+					}
+
+					var ds = new google.maps.DirectionsService();
+
+					var dr = new google.maps.DirectionsRenderer(objConfDR);
+
+					ds.route(objConfDS, fn_rutear);
+
+					function fn_rutear(resultado, status) {
+						if (status=='OK') {
+							dr.setDirections(resultado);
+						}else{
+							console.log('error al trazar ruta');
+						}
+					}
+				}
+	
+
+				b1 ++;
+
+
+			//---------------
 
   	});// fin de click
 
@@ -55,19 +195,7 @@ function fn_ok(rta) {
 
 
 function medir(latx,lony) {
-	var capillas={ 
-			libertad : new google.maps.LatLng(-12.066235471981807, -75.20984351634979),
-			central : new google.maps.LatLng(-12.071019690031068, -75.21696746349335),	
-			sancarlos : new google.maps.LatLng(-12.053267293663202, -75.19913613796234),	
-			florida : new google.maps.LatLng (-12.066854487600306, -75.22723495960236),
-			chilca : new google.maps.LatLng(-12.076370358674138,  -75.1973444223404),
-			esquinas : new google.maps.LatLng(-12.053036463452461, -75.21278321743011),
-			mantaro : new google.maps.LatLng(-12.049783825802876, -75.22720277309418),
-			pilcomayo : new google.maps.LatLng(-12.055533623023129, -75.2604728937149),
-			chupaca : new google.maps.LatLng(-12.062605284758021, -75.28371155261993),
-			manti : new google.maps.LatLng(-12.022773870051635, -75.23734420537949)
-		}
-		
+
 
 		//var origen = new google.maps.LatLng(-12.064387335184453, -75.21268799901009);
 
@@ -78,34 +206,12 @@ function medir(latx,lony) {
 		var med3=500000000.5;
 		var medx;
 		var medf;
-		var band1;
-		var band2;
 
 		var nomb_a;
 		var nomb_b;
 		var nomb_c;
-		var nomb_d;
 		var nomb_e;
-		var nomb_x;
-		var nomb_y;
 
-		/*
-		for (var i in capillas) {
- 			var med_aux = google.maps.geometry.spherical.computeDistanceBetween( origen, capillas[i] );
- 			//console.log(med_aux);
-
- 			if (med_aux < med1) {
- 				med1 = med_aux;
- 				band1 = capillas[i];
- 				
- 			};
-		};*/
-
-
-
-
-		//console.log('este es :'+med1+' metros');
-		//console.log(band1)
 			
 
 		for (var x in rutas) {
@@ -151,7 +257,7 @@ function medir(latx,lony) {
 				nomb_c = lugar;
 			} else if (med2 < med1) {
 				medx = med2;
-				nomb_d = lugar;
+				nomb_c = lugar;
 			}
 			
 
@@ -172,11 +278,13 @@ function medir(latx,lony) {
 			
 
 		}
+		
+		/*
 		console.log(nomb_a);
 		console.log(nomb_b);
 		console.log(nomb_c);
-		console.log(nomb_d);
 		console.log(nomb_e);
+		*/
 
 		if (medx<med3) {
 				medf = medx;
@@ -185,7 +293,9 @@ function medir(latx,lony) {
 		};
 		//console.log(medf);
 		
+		graf_rutas(nomb_a, nomb_b,nomb_c,nomb_e);
 };
+//
 
 
 //Json rutas
@@ -193,7 +303,7 @@ var rutas ={
 				ucci: {//inicio
 					inicio: {lat: -12.047208967661641, lng: -75.19922867417336},
 					final: {lat: -12.06861605050217, lng: -75.21021097898483},
-					waypts: [
+					waypts: [ //el numero de waypoints maximo es 8
 								{location: new google.maps.LatLng(-12.051727018076974,-75.20204901695251)},
 								{location: new google.maps.LatLng(-12.05703610331996,-75.20507454872131)},
 								{location: new google.maps.LatLng(-12.060895092338846,-75.20760118961334)},
@@ -231,5 +341,15 @@ var rutas ={
 							]
 					  }// fin 
 
+
+}
+
+
+function graf_rutas(a,b,c,e) {
+
+	localStorage.setItem('nombre_1', a);
+	localStorage.setItem('nombre_2', b);
+	localStorage.setItem('nombre_3', c);
+	localStorage.setItem('nombre_4', e);
 
 }
