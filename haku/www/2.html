@@ -9,11 +9,34 @@
 	<script src='js/jquery-1.12.0.min.js'></script>
 	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDQ4bxGcDftPjIW7wIwLk7OTZlWsoY-zhc&libraries=geometry"></script>
 	<script src="js/main.js"></script>
+	
 </head>
 <body>
 	<div id="mapa"></div>
-	<div id="botones">
-		<a href="#">Siguiente Ruta Mas Cercana</a>
+	<!-- con onclick se llama a una funcion: onclick = "fn_mal()" -->
+	<div id="botones" > 
+		</br>
+		<p>Para tener mas presicion, amplie mas el mapa y vuelva a intentarlo</p>
+		<img src="img/scrolldown.gif" height="35" width="35">
+	</div>
+
+	<div id="info">
+		<img src="https://c1.staticflickr.com/9/8434/29667006776_d660361e91_z.jpg">
+		
+		<div id="txt_info">
+			<h3>PARADERO INICIAL</h3>
+			<h4>Ubicacion :</h4> 
+			<p id="ubi">Lorem ipsum dolor sit amet</p>
+			<h4>Zona :</h4>
+			<p id="zona">Lorem ipsum dolor sit amet</p>
+			<h4>Distrito :</h4>
+			<p id="dist">Lorem ipsum dolor sit amet</p>
+		</div>
+
+		<div id="pie">
+			<p>@fralch</p>
+		</div>
+
 	</div>
 </body>
 </html>

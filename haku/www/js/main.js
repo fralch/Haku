@@ -30,13 +30,20 @@ function fn_ok(rta) {
 		map: mapa
 	});
 
-	mapa.addListener('click', function(e) { //inicio de click
-   		 
+	mapa.addListener('click', function clicky(e) { //inicio de click
+   			
+   		$("#botones").css({"display": "inline-block"}); 
+   		$("#info").css({"display": "block"}); 
+   		$("#mapa").css({"height": "90%"}); 
+   		//$("#info img").css({"margin-top": "30%"}); 
+
+
+   		// Limpiando el localstorage	 
    		 localStorage.removeItem('nombre_1');
    		 localStorage.removeItem('nombre_2');
    		 localStorage.removeItem('nombre_3');
    		 localStorage.removeItem('nombre_4');
-   		 //Aqui pegas waypoingts ()
+   		
    		 
    		 	
    		 	//obteniendo posicion del click
@@ -52,7 +59,10 @@ function fn_ok(rta) {
 
 			medir(latitudx,longitudx);
 
-				//-----------------
+//-------------------------------------------------------------------
+	//GRAFICANDO LAS RUTAS POR MEDIO DE LOS IF
+
+			//guardando los nombres de las rutas en los i's
 			
 			var i4 = (localStorage.getItem('nombre_1'));
 			var i3 = (localStorage.getItem('nombre_2'));
@@ -60,8 +70,8 @@ function fn_ok(rta) {
 			var i1 = (localStorage.getItem('nombre_4'));
 			
 			
-				if (b1 == 1) {
-					console.log('del local es '+i1);
+				if (b1 == 1) {// es la b1 es la bandera que cuenta los clicks y segun a ello grafica la ruta
+					//console.log('del local es '+i1);
 
 					var objConfDR = { 
 					map: mapa,
@@ -89,10 +99,18 @@ function fn_ok(rta) {
 							console.log('error al trazar ruta');
 						}
 					}
+					//
+					$( "#info img" ).attr( "src", rutas[i1].imagen );
+					//$( "p" ).text( "<b>Some</b> new text." );
+					$( "#txt_info #ubi"  ).text( rutas[i1].datos.nombre);
+					$( "#txt_info #zona"  ).text( rutas[i1].datos.lorem1);
+					$( "#txt_info #dist"  ).text( rutas[i1].datos.lorem2);
+					
+
 				}
 
 				if (b1 == 2) {
-					console.log('del local es '+i2);
+					//console.log('del local es '+i2);
 
 					var objConfDR = { 
 					map: mapa,
@@ -120,9 +138,16 @@ function fn_ok(rta) {
 							console.log('error al trazar ruta');
 						}
 					}
+
+					//
+					$( "#info img" ).attr( "src", rutas[i2].imagen );
+					$( "#txt_info #ubi"  ).text( rutas[i2].datos.nombre);
+					$( "#txt_info #zona"  ).text( rutas[i2].datos.lorem1);
+					$( "#txt_info #dist"  ).text( rutas[i2].datos.lorem2);
+
 				}
 				if (b1 == 3) {
-					console.log('del local es '+i3);
+					//console.log('del local es '+i3);
 
 					var objConfDR = { 
 					map: mapa,
@@ -150,10 +175,15 @@ function fn_ok(rta) {
 							console.log('error al trazar ruta');
 						}
 					}
+					//
+					$( "#info img" ).attr( "src", rutas[i3].imagen );
+					$( "#txt_info #ubi"  ).text( rutas[i3].datos.nombre);
+					$( "#txt_info #zona"  ).text( rutas[i3].datos.lorem1);
+					$( "#txt_info #dist"  ).text( rutas[i3].datos.lorem2);
 				}
 
 				if (b1 == 4) {
-					console.log('del local es '+i4);
+					//console.log('del local es '+i4);
 
 					var objConfDR = { 
 					map: mapa,
@@ -181,15 +211,22 @@ function fn_ok(rta) {
 							console.log('error al trazar ruta');
 						}
 					}
+					//
+					$( "#info img" ).attr( "src", rutas[i4].imagen );
+					$( "#txt_info #ubi"  ).text( rutas[i4].datos.nombre);
+					$( "#txt_info #zona"  ).text( rutas[i4].datos.lorem1);
+					$( "#txt_info #dist"  ).text( rutas[i4].datos.lorem2);
 				}
 	
 
-				b1 ++;
+				b1 ++; //la bandera incrementa uno en cada click
 
 
-			//---------------
+//-------------------------------------------------------------------
 
-  	});// fin de click
+
+  	});
+  	// fin de click
 
 }
 
@@ -280,10 +317,10 @@ function medir(latx,lony) {
 		}
 		
 		/*
-		console.log(nomb_a);
-		console.log(nomb_b);
-		console.log(nomb_c);
-		console.log(nomb_e);
+		console.log('medida way'+nomb_e);
+		console.log('menor ini y fin'+nomb_c);
+		console.log('medida final'+nomb_b);
+		console.log('medida inicio'+nomb_a);
 		*/
 
 		if (medx<med3) {
@@ -297,6 +334,20 @@ function medir(latx,lony) {
 };
 //
 
+function graf_rutas(a,b,c,e) {
+
+	localStorage.setItem('nombre_1', a);
+	localStorage.setItem('nombre_2', b);
+	localStorage.setItem('nombre_3', c);
+	localStorage.setItem('nombre_4', e);
+
+}
+
+
+
+
+
+
 
 //Json rutas
 var rutas ={
@@ -309,8 +360,15 @@ var rutas ={
 								{location: new google.maps.LatLng(-12.060895092338846,-75.20760118961334)},
 								{location: new google.maps.LatLng(-12.065919668405291,-75.20520597696304)},
 								{location: new google.maps.LatLng(-12.067400058721029,-75.20796597003937)}
-							]
+							],
+					imagen: "http://cdn.lopezdoriga.com/wp-content/uploads/2016/05/Transporte-de-Lujo-Guadalajara-2.jpg",
+					datos: 	{
+								nombre: 'nombre de ruta ucci',
+								lorem1: 'lorem++ ucci',
+								lorem2: 'lorem++ ucci',
+							}
 					  },// fin 
+					
 
 				umuto: {//inicio
 					inicio: {lat: -12.04297624253849, lng: -75.22020220756531},
@@ -323,7 +381,13 @@ var rutas ={
 								{location: new google.maps.LatLng(-12.05923682578966,-75.21102704107761)},
 								{location: new google.maps.LatLng(-12.06387060983608,-75.20765617489815)},
 								{location: new google.maps.LatLng(-12.06822261122515,-75.2053239941597)}
-							]
+							],
+					imagen: "https://c1.staticflickr.com/9/8434/29667006776_d660361e91_z.jpg",
+					datos: 	{
+								nombre: 'nombre de ruta umuto',
+								lorem1: 'lorem++ umuto',
+								lorem2: 'lorem++ umuto',
+							}
 					  },// fin 
 
 				upla: {//inicio
@@ -338,18 +402,15 @@ var rutas ={
 								{location: new google.maps.LatLng(-12.063684903153375,-75.20156353712082)},
 								{location: new google.maps.LatLng(-12.06633094724462,-75.20606562495232)},
 								{location: new google.maps.LatLng(-12.068557821653664,-75.21020159125328)}
-							]
+							],
+					imagen: "http://cde.publimetro.e3.pe/ima/0/0/0/9/2/92711.jpg",
+					datos: 	{
+								nombre: 'nombre de ruta upla',
+								lorem1: 'lorem++ upla',
+								lorem2: 'lorem++ upla',
+							}
 					  }// fin 
 
 
 }
 
-
-function graf_rutas(a,b,c,e) {
-
-	localStorage.setItem('nombre_1', a);
-	localStorage.setItem('nombre_2', b);
-	localStorage.setItem('nombre_3', c);
-	localStorage.setItem('nombre_4', e);
-
-}
