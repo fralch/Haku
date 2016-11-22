@@ -6,8 +6,8 @@ function fn_mal() {
 	console.log("algo salio mal");
 	
 	var rta = {coords:{
-				latitude: -12.064355859406861,
-				longitude: -75.21272018551826
+				latitude: -12.068424204016377,
+				longitude: -75.21024601009526
 				}};
 	fn_ok(rta);
 }
@@ -15,8 +15,8 @@ function fn_mal() {
 function fn_ok(rta) {
 	//------------estilos --------
 	//var styles = [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#000000"},{"lightness":40}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#000000"},{"lightness":16}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":21}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":16}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":19}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":17}]}]
-	var styles =[{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"on"},{"lightness":33}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2e5d4"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#c5dac6"}]},{"featureType":"poi.park","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":20}]},{"featureType":"road","elementType":"all","stylers":[{"lightness":20}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#c5c6c6"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#e4d7c6"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#fbfaf7"}]},{"featureType":"water","elementType":"all","stylers":[{"visibility":"on"},{"color":"#acbcc9"}]}]
-	var styledMap = new google.maps.StyledMapType(styles, {name: "Styled Map"});
+	//var styles =[{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"on"},{"lightness":33}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2e5d4"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#c5dac6"}]},{"featureType":"poi.park","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":20}]},{"featureType":"road","elementType":"all","stylers":[{"lightness":20}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#c5c6c6"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#e4d7c6"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#fbfaf7"}]},{"featureType":"water","elementType":"all","stylers":[{"visibility":"on"},{"color":"#acbcc9"}]}]
+	//var styledMap = new google.maps.StyledMapType(styles, {name: "Styled Map"});
 
 	//---------fin estilos---------
 
@@ -29,9 +29,9 @@ function fn_ok(rta) {
 		center: posicion,
 		zoom: 16,
 		// mapTypecontrol ayuda a fijar stilo de mapa
-		mapTypeControlOptions: {
+		/*mapTypeControlOptions: {
       	mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
-    	}
+    	}*/
 	}
 	var mapa= new google.maps.Map(document.getElementById('mapa'),opcionesMapa);
 
@@ -51,15 +51,15 @@ function fn_ok(rta) {
 		});
 	
 
-
+		//----- seteando estilo de mapa --------
+		//mapa.mapTypes.set('map_style', styledMap);
+  		//mapa.setMapTypeId('map_style');
+		//--------- fin estilo mapa ------
 
 	// aqui comienza el click
 	mapa.addListener('click', function(e) { //inicio de click
 
-		//----- seteando estilo de mapa --------
-		mapa.mapTypes.set('map_style', styledMap);
-  		mapa.setMapTypeId('map_style');
-		//--------- fin estilo mapa ------
+
    			
    		$("#botones").css({"display": "inline-block"}); 
    		$("#info").css({"display": "block"}); 
@@ -83,11 +83,13 @@ function fn_ok(rta) {
 			var coordenadas = e.latLng.lat() + ", " + e.latLng.lng();
 			coordgeo = new google.maps.LatLng(e.latLng.lat(), e.latLng.lng());
 			
-			var maker2= new google.maps.Marker({
+		if (b1 == 1) {
+				var maker2= new google.maps.Marker({
 				position: coordgeo,
 				map: mapa
-			});	
+				});	
 
+		}
 			//Las muestro con un popup
 			console.log(coordenadas);
 
@@ -145,7 +147,7 @@ function fn_ok(rta) {
 					
 
 				}
-
+				/* // comentando este codigo para que funcione solo un click
 				if (b1 == 2) {
 					//console.log('del local es '+i2);
 
@@ -220,7 +222,7 @@ function fn_ok(rta) {
 					$( "#txt_info #zona"  ).text( rutas[i3].datos.lorem1);
 					$( "#txt_info #dist"  ).text( rutas[i3].datos.lorem2);
 				}
-
+				
 				if (b1 == 4) {
 					//console.log('del local es '+i4);
 
@@ -257,7 +259,7 @@ function fn_ok(rta) {
 					$( "#txt_info #zona"  ).text( rutas[i4].datos.lorem1);
 					$( "#txt_info #dist"  ).text( rutas[i4].datos.lorem2);
 				}
-	
+				*/ //FIN comentando este codigo para que funcione solo un click
 
 				b1 ++; //la bandera incrementa uno en cada click
 
@@ -403,7 +405,7 @@ function graf_rutas(a,b,c,e) {
 var rutas ={
 
 				//----------------------------------------------------
-				tm01: {//inicio
+				tm04: {//inicio
 					inicio: {lat: -12.078405682575637, lng:-75.2301424741745},
 					final: {lat: -12.056876622960312, lng: -75.2032881975174},
 					waypts: [ //el numero de waypoints maximo es 8
@@ -416,7 +418,7 @@ var rutas ={
 								{location: new google.maps.LatLng(-12.06155608806243,-75.20387828350067)},
 								{location: new google.maps.LatLng(-12.058691761493174,-75.20386755466461)}
 							],
-					imagen: "http://cdn.lopezdoriga.com/wp-content/uploads/2016/05/Transporte-de-Lujo-Guadalajara-2.jpg",
+					imagen: "https://c2.staticflickr.com/6/5808/31031624985_f561a6522f_z.jpg",
 					datos: 	{
 								n_ruta: 'TM-01 (EX TM-04)',
 								nombre: 'La Rivera',
@@ -426,7 +428,7 @@ var rutas ={
 					  },// fin 
 				//---------------------------------------------------------	
 				//----------------------------------------------------
-				tm01a: {//inicio
+				tm04a: {//inicio
 					inicio: {lat: -12.059393157654096, lng:-75.20347461104393},
 					final: {lat: -12.024568253149075, lng: -75.18422573804855},
 					waypts: [ //el numero de waypoints maximo es 8
@@ -439,7 +441,7 @@ var rutas ={
 								{location: new google.maps.LatLng(-12.024223020178008,-75.18590748310089)},
 								{location: new google.maps.LatLng(-12.024568253149075,-75.18422573804855)}
 							],
-					imagen: "http://cdn.lopezdoriga.com/wp-content/uploads/2016/05/Transporte-de-Lujo-Guadalajara-2.jpg",
+					imagen: "https://c2.staticflickr.com/6/5808/31031624985_f561a6522f_z.jpg",
 					datos: 	{
 								n_ruta: 'TM-01 (EX TM-04)',
 								nombre: 'La Rivera',
@@ -452,7 +454,7 @@ var rutas ={
 
 
 				//----------------------------------------------------
-				tm01v: {//inicio
+				tm04v: {//inicio
 					inicio: {lat: -12.024726704886781, lng: -75.18605768680573},
 					final: {lat: -12.078489613145834, lng: -75.23031413555145},
 					waypts: [ //el numero de waypoints maximo es 8
@@ -465,7 +467,7 @@ var rutas ={
 								{location: new google.maps.LatLng(-12.075405147409509,-75.22467076778412)},
 								{location: new google.maps.LatLng(-12.077283108670045,-75.22809326648712)}
 							],
-					imagen: "http://cdn.lopezdoriga.com/wp-content/uploads/2016/05/Transporte-de-Lujo-Guadalajara-2.jpg",
+					imagen: "https://c2.staticflickr.com/6/5808/31031624985_f561a6522f_z.jpg",
 					datos: 	{
 								n_ruta: 'TM-01 (EX TM-04)',
 								nombre: 'Uñas',
@@ -476,57 +478,10 @@ var rutas ={
 				//---------------------------------------------------------	
 
 
-				//----------------------------------------------------
-				tm02: {//inicio
-					inicio: {lat: -12.053456155761383, lng: -75.23531377315521},
-					final: {lat: -12.070341930639128, lng: -75.20171910524368},
-					waypts: [ //el numero de waypoints maximo es 8
-								{location: new google.maps.LatLng(-12.061822584866428,-75.23251622915268)},
-								{location: new google.maps.LatLng(-12.058271028660178,-75.22862166166306)},
-								{location: new google.maps.LatLng(-12.064996387687463,-75.22372931241989)},
-								{location: new google.maps.LatLng(-12.06270390908722,-75.21927148103714)},
-								{location: new google.maps.LatLng(-12.076253903855136,-75.21096736192703)},
-								{location: new google.maps.LatLng(-12.074213317375902,-75.20698696374893)},
-								{location: new google.maps.LatLng(-12.073137937783263,-75.20494312047958)},
-								{location: new google.maps.LatLng(-12.072046816515927,-75.20267933607101)}
-							],
-					imagen: "http://cdn.lopezdoriga.com/wp-content/uploads/2016/05/Transporte-de-Lujo-Guadalajara-2.jpg",
-					datos: 	{
-								n_ruta: 'RUTA: TM-02 (EX TM-06)',
-								nombre: 'Brisas del Mantaro',
-								lorem1: 'Huancayo',
-								lorem2: 'Huancayo',
-							}
-					  },// fin 
-				//---------------------------------------------------------	
 				
-				//----------------------------------------------------
-				tm02v: {//inicio
-					inicio: {lat: -12.071974424883384, lng: -75.20485460758209},
-					final: {lat: -12.055858880952107, lng: -75.2345198392868},
-					waypts: [ //el numero de waypoints maximo es 8
-								{location: new google.maps.LatLng(-12.072665818789723,-75.20649343729019)},
-								{location: new google.maps.LatLng(-12.068458675180855,-75.20922392606735)},
-								{location: new google.maps.LatLng(-12.070656679937718,-75.214384496212)},
-								{location: new google.maps.LatLng(-12.064923993990206,-75.21785795688629)},
-								{location: new google.maps.LatLng(-12.062920042341737,-75.21975696086884)},
-								{location: new google.maps.LatLng(-12.06490301028763,-75.22390902042389)},
-								{location: new google.maps.LatLng(-12.059709492752505,-75.22763192653656)},
-								{location: new google.maps.LatLng(-12.058586840525193,-75.23375809192657)}
-							],
-					imagen: "http://cdn.lopezdoriga.com/wp-content/uploads/2016/05/Transporte-de-Lujo-Guadalajara-2.jpg",
-					datos: 	{
-								n_ruta: 'RUTA: TM-02 (EX TM-06)',
-								nombre: 'Huancayo',
-								lorem1: 'Brisas del Mantaro',
-								lorem2: 'Huancayo',
-							}
-					  },// fin 
-				//---------------------------------------------------------	
-
 
 				//----------------------------------------------------
-				tm03: {//inicio
+				tm07: {//inicio
 					inicio: {lat: -12.064546286452064, lng:-75.22992789745331},
 					final: {lat: -12.057264835373637, lng: -75.18894374370575},
 					waypts: [ //el numero de waypoints maximo es 8
@@ -539,7 +494,7 @@ var rutas ={
 								{location: new google.maps.LatLng(-12.062069145780827,-75.19784599542618)},
 								{location: new google.maps.LatLng(-12.05928876255667,-75.19703596830368)}
 							],
-					imagen: "http://cdn.lopezdoriga.com/wp-content/uploads/2016/05/Transporte-de-Lujo-Guadalajara-2.jpg",
+					imagen: "https://c5.staticflickr.com/6/5712/30995951956_bc5f23d121_z.jpg",
 					datos: 	{
 								n_ruta: 'TM-03 (EX TM-07)',
 								nombre: 'Urb. La Florida',
@@ -550,7 +505,7 @@ var rutas ={
 				//---------------------------------------------------------	
 
 				//----------------------------------------------------
-				tm03v: {//inicio
+				tm07v: {//inicio
 					inicio: {lat: -12.060234094985915, lng:-75.19384682178497},
 					final: {lat: -12.066480980074797, lng: -75.22893279790878},
 					waypts: [ //el numero de waypoints maximo es 8
@@ -563,7 +518,7 @@ var rutas ={
 								{location: new google.maps.LatLng(-12.063327304304684,-75.22850632667542)},
 								{location: new google.maps.LatLng(-12.066480980074797,-75.22893279790878)}
 							],
-					imagen: "http://cdn.lopezdoriga.com/wp-content/uploads/2016/05/Transporte-de-Lujo-Guadalajara-2.jpg",
+					imagen: "https://c8.staticflickr.com/6/5350/30946333031_7422bde684_z.jpg",
 					datos: 	{
 								n_ruta: 'TM-03 (EX TM-07)',
 								nombre: 'Cerrito La Libertad',
@@ -574,121 +529,240 @@ var rutas ={
 				//---------------------------------------------------------	
 
 				//----------------------------------------------------
-				tm04: {//inicio
-					inicio: {lat: -12.03629440206177, lng:-75.22728592157364},
-					final: {lat: -12.179065652993014, lng: -75.20025730133057},
+				tm16: {//inicio
+					inicio: {lat: -12.029717325800885, lng:-75.23521184921265},
+					final: {lat: -12.092669303597651, lng: -75.21349668502808},
 					waypts: [ //el numero de waypoints maximo es 8
-								{location: new google.maps.LatLng(-12.051503006841886,-75.21480157971382)},
-								{location: new google.maps.LatLng(-12.052895866126015,-75.21678641438484)},
-								{location: new google.maps.LatLng(-12.059067903850652,-75.21223470568657)},
-								{location: new google.maps.LatLng(-12.05881347078923,-75.21123960614204)},
-								{location: new google.maps.LatLng(-12.082228169817771,-75.20191088318825)},
-								{location: new google.maps.LatLng(-12.089263984117762,-75.21267592906952)},
-								{location: new google.maps.LatLng(-12.110622595829659,-75.21632373332977)},
-								{location: new google.maps.LatLng(-12.179065652993014,-75.20025730133057)}
+								{location: new google.maps.LatLng(-12.050992552653836,-75.22176861763)},
+								{location: new google.maps.LatLng(-12.062911649246422,-75.21385073661804)},
+								{location: new google.maps.LatLng(-12.065492651512605,-75.21771311759949)},
+								{location: new google.maps.LatLng(-12.069164766694884,-75.21488070487976)},
+								{location: new google.maps.LatLng(-12.068388380889909,-75.21269202232361)},
+								{location: new google.maps.LatLng(-12.07477461167104,-75.20815640687943)},
+								{location: new google.maps.LatLng(-12.074412655877959,-75.20678848028183)},
+								{location: new google.maps.LatLng(-12.082497267248524,-75.20219385623932)}
 							],
-					imagen: "http://cdn.lopezdoriga.com/wp-content/uploads/2016/05/Transporte-de-Lujo-Guadalajara-2.jpg",
+					imagen: "https://c8.staticflickr.com/6/5350/30946333031_7422bde684_z.jpg",
 					datos: 	{
-								n_ruta: 'TM-04 (EX TM-11)',
-								nombre: 'Umuto',
-								lorem1: 'Mayopampa',
-								lorem2: 'Viques',
+								n_ruta: 'TM-07 (EX TM-16)',
+								nombre: 'La Victoria',
+								lorem1: 'Huancan',
+								lorem2: 'El Tambo',
 							}
 					  },// fin 
 				//---------------------------------------------------------	
 				
 				//----------------------------------------------------
-				tm04v: {//inicio
-					inicio: {lat: -12.179317329092772, lng:-75.20008563995361},
-					final: {lat: -12.03072887506795, lng: -75.21581947803497},
+				tm16v: {//inicio
+					inicio: {lat: -12.082430122262828, lng:-75.20190954208374},
+					final: {lat: -12.029248281224499, lng: -75.23510724306107},
 					waypts: [ //el numero de waypoints maximo es 8
-								{location: new google.maps.LatLng(-12.088984923799615,-75.21266788244247)},
-								{location: new google.maps.LatLng(-12.082155255626366,-75.20185858011246)},
-								{location: new google.maps.LatLng(-12.068348511856646,-75.20410090684891)},
-								{location: new google.maps.LatLng(-12.056644222412931,-75.20908579230309)},
-								{location: new google.maps.LatLng(-12.058374900556993,-75.21135091781616)},
-								{location: new google.maps.LatLng(-12.04583234354644,-75.2175173163414)},
-								{location: new google.maps.LatLng(-12.036332178736922,-75.22734224796295)},
-								{location: new google.maps.LatLng(-12.033520048425716,-75.22159159183502)}
+								{location: new google.maps.LatLng(-12.073936341715516,-75.20635664463043)},
+								{location: new google.maps.LatLng(-12.068228906001984,-75.20955383777618)},
+								{location: new google.maps.LatLng(-12.070600024572576,-75.21442472934723)},
+								{location: new google.maps.LatLng(-12.063822346743814,-75.21813690662384)},
+								{location: new google.maps.LatLng(-12.060496395717784,-75.21280467510223)},
+								{location: new google.maps.LatLng(-12.054037428461005,-75.21719545125961)},
+								{location: new google.maps.LatLng(-12.054766640706804,-75.218885242939)},
+								{location: new google.maps.LatLng(-12.0434452657151,-75.22583216428757)}
 							],
-					imagen: "http://cdn.lopezdoriga.com/wp-content/uploads/2016/05/Transporte-de-Lujo-Guadalajara-2.jpg",
+					imagen: "https://c8.staticflickr.com/6/5350/30946333031_7422bde684_z.jpg",
 					datos: 	{
 								n_ruta: 'TM-04 (EX TM-11)',
-								nombre: 'Umuto',
-								lorem1: 'Mayopampa',
+								nombre: 'Huancan',
+								lorem1: 'La Victoria',
 								lorem2: 'Viques',
 							}
 					  },// fin 
 				//---------------------------------------------------------	
 				//----------------------------------------------------
-				tm05: {//inicio
-					inicio: {lat: -12.027107649405655, lng:-75.23671120405197},
-					final: {lat: -12.105461436332577, lng: -75.20532667636871},
+				tm1: {//inicio
+					inicio: {lat: -11.995549212804487, lng:-75.25508165359497},
+					final: {lat: -12.076307409770505, lng: -75.20542323589325},
 					waypts: [ //el numero de waypoints maximo es 8
-								{location: new google.maps.LatLng(-12.04338230988305,-75.2257838845253)},
-								{location: new google.maps.LatLng(-12.041441154612349,-75.22235602140427)},
-								{location: new google.maps.LatLng(-12.070327242568547,-75.20473659038544)},
-								{location: new google.maps.LatLng(-12.074083223287737,-75.2050369977951)},
-								{location: new google.maps.LatLng(-12.076265444787037,-75.20543396472931)},
-								{location: new google.maps.LatLng(-12.080021342070863,-75.208620429039)},
-								{location: new google.maps.LatLng(-12.086556267523711,-75.20826369524002)},
-								{location: new google.maps.LatLng(-12.08993959474384,-75.20780235528946)}
+								{location: new google.maps.LatLng(-12.043509271505693,-75.2260547876358)},
+								{location: new google.maps.LatLng(-12.04669902980779,-75.23077547550201)},
+								{location: new google.maps.LatLng(-12.069194142642477,-75.21540105342865)},
+								{location: new google.maps.LatLng(-12.066963601657147,-75.21105319261551)},
+								{location: new google.maps.LatLng(-12.06498589551903,-75.20711034536362)},
+								{location: new google.maps.LatLng(-12.067809236813021,-75.20542323589325)},
+								{location: new google.maps.LatLng(-12.072887189859957,-75.20482242107391)},
+								{location: new google.maps.LatLng(-12.076307409770505,-75.20542323589325)}
 							],
-					imagen: "http://cdn.lopezdoriga.com/wp-content/uploads/2016/05/Transporte-de-Lujo-Guadalajara-2.jpg",
+					imagen: "https://c2.staticflickr.com/6/5647/31067388145_41b4acea28_z.jpg",
 					datos: 	{
-								n_ruta: 'TM-05 (EX TM-12)',
-								nombre: 'La Victoria - El Tambo',
+								n_ruta: 'TM-09 (EX TM-1A)',
+								nombre: 'San Agustín de Cajas',
+								lorem1: 'Barrio San José',
+								lorem2: 'Cajas',
+							}
+					  },// fin 
+				//---------------------------------------------------------	
+				//----------------------------------------------------
+				tm1v: {//inicio
+					inicio: {lat: -12.076307409770505, lng:-75.20542323589325},
+					final: {lat: -11.999457359602692, lng: -75.25288760662079},
+					waypts: [ //el numero de waypoints maximo es 8
+								{location: new google.maps.LatLng(-12.068936047594981,-75.20508795976639)},
+								{location: new google.maps.LatLng(-12.067561632179565,-75.20296901464462)},
+								{location: new google.maps.LatLng(-12.06535311028368,-75.20418137311935)},
+								{location: new google.maps.LatLng(-12.06950889344944,-75.21173179149628)},
+								{location: new google.maps.LatLng(-12.070589533423956,-75.21441400051117)},
+								{location: new google.maps.LatLng(-12.046373759496596,-75.23057162761688)},
+								{location: new google.maps.LatLng(-12.042596405430546,-75.22652685642242)},
+								{location: new google.maps.LatLng(-11.999457359602692,-75.25288760662079)}
+							],
+					imagen: "https://c2.staticflickr.com/6/5647/31067388145_41b4acea28_z.jpg",
+					datos: 	{
+								n_ruta: 'TM-09 (EX TM-1A)',
+								nombre: 'Barrio San José',
+								lorem1: 'San Agustín de Cajas',
+								lorem2: 'Cajas',
+							}
+					  },// fin 
+				//---------------------------------------------------------	
+				//----------------------------------------------------
+				tc04: {//inicio
+					inicio: {lat: -12.042019304991703, lng:-75.193310379982},
+					final: {lat: -12.105736280533682, lng: -75.20526766777039},
+					waypts: [ //el numero de waypoints maximo es 8
+								{location: new google.maps.LatLng(-12.057831408344137,-75.20401775836945)},
+								{location: new google.maps.LatLng(-12.060118683222989,-75.20461857318878)},
+								{location: new google.maps.LatLng(-12.062269542575915,-75.20455420017242)},
+								{location: new google.maps.LatLng(-12.06418956342254,-75.20753681659698)},
+								{location: new google.maps.LatLng(-12.066697110924382,-75.20667850971222)},
+								{location: new google.maps.LatLng(-12.071009198418619,-75.21433889865875)},
+								{location: new google.maps.LatLng(-12.085896382336811,-75.20824491977692)},
+								{location: new google.maps.LatLng(-12.089851471158676,-75.20744025707245)}
+							],
+					imagen: "https://c3.staticflickr.com/6/5610/30995950226_64cfc39923_z.jpg",
+					datos: 	{
+								n_ruta: 'TC-05 (EX TC-04)',
+								nombre: 'Vilcacoto',
 								lorem1: 'Huari',
+								lorem2: 'Huancayo',
+							}
+					  },// fin 
+				//---------------------------------------------------------	
+				//----------------------------------------------------
+				tc04v: {//inicio
+					inicio: {lat: -12.105736280533682, lng:-75.20526766777039},
+					final: {lat: -12.031295506590336, lng: -75.1892226934433},
+					waypts: [ //el numero de waypoints maximo es 8
+								{location: new google.maps.LatLng(-12.086034863375795,-75.20825028419495)},
+								{location: new google.maps.LatLng(-12.071529581644423,-75.21376356482506)},
+								{location: new google.maps.LatLng(-12.069315846690273,-75.20963832736015)},
+								{location: new google.maps.LatLng(-12.067765696601326,-75.207629352808)},
+								{location: new google.maps.LatLng(-12.064324383785662,-75.20232662558556)},
+								{location: new google.maps.LatLng(-12.06004628788851,-75.20441606640816)},
+								{location: new google.maps.LatLng(-12.057953117390213,-75.20407810807228)},
+								{location: new google.maps.LatLng(-12.048283404167911,-75.19535958766937)}
+							],
+					imagen: "https://c3.staticflickr.com/6/5610/30995950226_64cfc39923_z.jpg",
+					datos: 	{
+								n_ruta: 'TC-05 (EX TC-04)',
+								nombre: 'Huari',
+								lorem1: 'Vilcacoto',
+								lorem2: 'Huancán',
+							}
+					  },// fin 
+				//---------------------------------------------------------	
+				//----------------------------------------------------
+				tc07: {//inicio
+					inicio: {lat: -12.017265776111145, lng:-75.22557199001312},
+					final: {lat: -12.143792201876195, lng: -75.16222357749939},
+					waypts: [ //el numero de waypoints maximo es 8
+								{location: new google.maps.LatLng(-12.023541992800752,-75.23913994431496)},
+								{location: new google.maps.LatLng(-12.050696666159487,-75.22163450717926)},
+								{location: new google.maps.LatLng(-12.063272571318928,-75.21469965577126)},
+								{location: new google.maps.LatLng(-12.069215126009086,-75.21542251110077)},
+								{location: new google.maps.LatLng(-12.067999137586648,-75.21283820271492)},
+								{location: new google.maps.LatLng(-12.074965556717396,-75.20850643515587)},
+								{location: new google.maps.LatLng(-12.07432557639306,-75.20681396126747)},
+								{location: new google.maps.LatLng(-12.119205428027033,-75.1789391040802)}
+							],
+					imagen: "https://c5.staticflickr.com/6/5582/30951905172_2f2f59868b_z.jpg",
+					datos: 	{
+								n_ruta: 'TC-07 (EX TC-06)',
+								nombre: 'Saños Grande',
+								lorem1: 'Punta',
+								lorem2: 'El Tambo',
+							}
+					  },// fin 
+				//---------------------------------------------------------	
+				//----------------------------------------------------
+				tc07v: {//inicio
+					inicio: {lat: -12.143792201876195, lng:-75.16222357749939},
+					final: {lat: -12.023415021425853, lng: -75.2391117811203},
+					waypts: [ //el numero de waypoints maximo es 8
+								{location: new google.maps.LatLng(-12.082383967279126,-75.20174860954285)},
+								{location: new google.maps.LatLng(-12.073390785824856,-75.20751535892487)},
+								{location: new google.maps.LatLng(-12.070043970237485,-75.21277248859406)},
+								{location: new google.maps.LatLng(-12.070537077354587,-75.21444618701935)},
+								{location: new google.maps.LatLng(-12.06387323280908,-75.21831527352333)},
+								{location: new google.maps.LatLng(-12.06049010075938,-75.21279126405716)},
+								{location: new google.maps.LatLng(-12.05407415110705,-75.21722763776779)},
+								{location: new google.maps.LatLng(-12.023415021425853,-75.2391117811203)}
+							],
+					imagen: "https://c5.staticflickr.com/6/5582/30951905172_2f2f59868b_z.jpg",
+					datos: 	{
+								n_ruta: 'TC-07 (EX TC-06)',
+								nombre: 'Punta',
+								lorem1: 'Saños Grande',
+								lorem2: 'El Tambo',
+							}
+					  },// fin 
+				//---------------------------------------------------------		
+				//----------------------------------------------------
+				tc09: {//inicio
+					inicio: {lat:-12.024361531773623, lng:-75.1858913898468},
+					final: {lat: -12.135776570791679, lng: -75.22290050983429},
+					waypts: [ //el numero de waypoints maximo es 8
+								{location: new google.maps.LatLng(-12.057852393240504,-75.2040284872055)},
+								{location: new google.maps.LatLng(-12.060244587660502,-75.20457565784454)},
+								{location: new google.maps.LatLng(-12.06441408948844,-75.20236283540726)},
+								{location: new google.maps.LatLng(-12.070892741108707,-75.21437913179398)},
+								{location: new google.maps.LatLng(-12.085968770685481,-75.20827978849411)},
+								{location: new google.maps.LatLng(-12.099504998872176,-75.21629691123962)},
+								{location: new google.maps.LatLng(-12.111799576693096,-75.21646857261658)},
+								{location: new google.maps.LatLng(-12.135776570791679,-75.22290050983429)}
+							],
+					imagen: "https://c3.staticflickr.com/6/5674/31061878786_34c0c17fb4_z.jpg",
+					datos: 	{
+								n_ruta: 'TC-10 (EX TC-09)',
+								nombre: 'Cullpa Alta',
+								lorem1: 'Huancan',
 								lorem2: 'Huancan',
 							}
 					  },// fin 
+				
 				//---------------------------------------------------------	
 
-				//----------------------------------------------------
-				tm05v: {//inicio
-					inicio: {lat: -12.105461436332577, lng:-75.20532667636871},
-					final: {lat: -12.027161165120605, lng: -75.23650467395782},
+				tc09v: {//inicio
+					inicio: {lat:-12.135776570791679, lng:-75.22290050983429},
+					final: {lat: -12.031421424544229, lng: -75.18928706645966},
 					waypts: [ //el numero de waypoints maximo es 8
-								{location: new google.maps.LatLng(-12.080545903897093,-75.208620429039)},
-								{location: new google.maps.LatLng(-12.059038000396297,-75.21090567111969)},
-								{location: new google.maps.LatLng(-12.053907324261345,-75.21334111690521)},
-								{location: new google.maps.LatLng(-12.050770113641708,-75.21485388278961)},
-								{location: new google.maps.LatLng(-12.04585962324198,-75.21750390529633)},
-								{location: new google.maps.LatLng(-12.043173505269765,-75.22603332996368)},
-								{location: new google.maps.LatLng(-12.031232545029457,-75.23380100727081)},
-								{location: new google.maps.LatLng(-12.027161165120605,-75.23650467395782)}
+								{location: new google.maps.LatLng(-12.074719006707735,-75.21194770932198)},
+								{location: new google.maps.LatLng(-12.071466632083407,-75.20606830716133)},
+								{location: new google.maps.LatLng(-12.069098144263556,-75.20724847912788)},
+								{location: new google.maps.LatLng(-12.068250939120539,-75.20600125193596)},
+								{location: new google.maps.LatLng(-12.06436897424794,-75.20230248570442)},
+								{location: new google.maps.LatLng(-12.058989212598501,-75.20370796322823)},
+								{location: new google.maps.LatLng(-12.053130893638807,-75.19987642765045)},
+								{location: new google.maps.LatLng(-12.047674838376876,-75.19511282444)}
 							],
-					imagen: "http://cdn.lopezdoriga.com/wp-content/uploads/2016/05/Transporte-de-Lujo-Guadalajara-2.jpg",
+					imagen: "https://c3.staticflickr.com/6/5674/31061878786_34c0c17fb4_z.jpg",
 					datos: 	{
-								n_ruta: 'TM-05 (EX TM-12)',
-								nombre: 'Huari',
-								lorem1: 'La Victoria - El Tambo',
-								lorem2: 'Huancan',
-							}
-					  },// fin 
-				//---------------------------------------------------------	
-				//----------------------------------------------------
-				tm06: {//inicio
-					inicio: {lat: -12.07837630763825, lng:-75.23009419441223},
-					final: {lat: -12.024296474256776, lng: -75.18591821193695},
-					waypts: [ //el numero de waypoints maximo es 8
-								{location: new google.maps.LatLng(-12.071511746049044,-75.21374076604843)},
-								{location: new google.maps.LatLng(-12.069691448565573,-75.20635932683945)},
-								{location: new google.maps.LatLng(-12.067597828754476,-75.20297035574913)},
-								{location: new google.maps.LatLng(-12.06279413916048,-75.20538032054901)},
-								{location: new google.maps.LatLng(-12.06032747433203,-75.20453542470932)},
-								{location: new google.maps.LatLng(-12.057898558213653,-75.20405262708664)},
-								{location: new google.maps.LatLng(-12.047674835815219,-75.19510209560394)},
-								{location: new google.maps.LatLng(-12.039647933809384,-75.19254863262177)}
-							],
-					imagen: "http://cdn.lopezdoriga.com/wp-content/uploads/2016/05/Transporte-de-Lujo-Guadalajara-2.jpg",
-					datos: 	{
-								n_ruta: 'TM-05 (EX TM-12)',
-								nombre: 'Huari',
-								lorem1: 'La Victoria - El Tambo',
-								lorem2: 'Huancan',
+								n_ruta: 'TC-10 (EX TC-09)',
+								nombre: 'Huancan',
+								lorem1: 'Cullpa Alta',
+								lorem2: 'Huancayo',
 							}
 					  }// fin 
-				//---------------------------------------------------------	
-};
+				//---------------------------------------------------------
+
+
+		
+				////////////////////////////////////////////////////////////////////////////////
+};// llave que cierra json
 
