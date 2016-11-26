@@ -8,8 +8,8 @@ function fn_mal() {
 	console.log("algo salio mal");
 	
 	var rta = {coords:{
-				latitude: -12.068424204016377,
-				longitude: -75.21024601009526
+				latitude: -12.047783958634945,
+				longitude: -75.19866675138474
 				}};
 	fn_ok(rta);
 }
@@ -81,114 +81,114 @@ function fn_ok(rta) {
 		if (latitudx > latgeo) {
 			//alert('vas al norte');
 			medirNorte(latitudx,longitudx);
-//-------------------------------------------------------------------
-	//GRAFICANDO LAS RUTAS POR MEDIO DE LOS IF
+			//-------------------------------------------------------------------
+				//GRAFICANDO LAS RUTAS POR MEDIO DE LOS IF
 
-			//guardando los nombres de las rutas en los i's
-			
-			var i1 = (localStorage.getItem('nombre_1'));
+						//guardando los nombres de las rutas en los i's
+						
+						var i1 = (localStorage.getItem('nombre_1'));
 
-			
-			
-				if (b1 == 1) {// es la b1 es la bandera que cuenta los clicks y segun a ello grafica la ruta
-					//console.log('del local es '+i1);
+						
+						
+							if (b1 == 1) {// es la b1 es la bandera que cuenta los clicks y segun a ello grafica la ruta
+								//console.log('del local es '+i1);
 
-					var objConfDR = { 
-					map: mapa,
-					suppressMarkers: true
-					}
-					var destino = rutas.norte[i1].final;
-					
-					var objConfDS = {
-						origin:rutas.norte[i1].inicio,
-						destination: destino,
-						waypoints:rutas.norte[i1].waypts,
-						travelMode: google.maps.TravelMode.WALKING
-					}
+								var objConfDR = { 
+								map: mapa,
+								suppressMarkers: true
+								}
+								var destino = rutas.norte[i1].final;
+								
+								var objConfDS = {
+									origin:rutas.norte[i1].inicio,
+									destination: destino,
+									waypoints:rutas.norte[i1].waypts,
+									travelMode: google.maps.TravelMode.WALKING
+								}
 
-					var ds = new google.maps.DirectionsService();
+								var ds = new google.maps.DirectionsService();
 
-					var dr = new google.maps.DirectionsRenderer(objConfDR);
+								var dr = new google.maps.DirectionsRenderer(objConfDR);
 
-					ds.route(objConfDS, fn_rutear);
+								ds.route(objConfDS, fn_rutear);
 
-					function fn_rutear(resultado, status) {
-						if (status=='OK') {
-							dr.setDirections(resultado);
-						}else{
-							console.log('error al trazar ruta');
-						}
-					}
-					//
-					$( "#info img" ).attr( "src", rutas.norte[i1].imagen );
-					//$( "p" ).text( "<b>Some</b> new text." );
-					
-					$( "#txt_info #nombreruta"  ).text( rutas.norte[i1].datos.n_ruta);
-					$( "#txt_info #ubi"  ).text( rutas.norte[i1].datos.nombre);
-					$( "#txt_info #zona"  ).text( rutas.norte[i1].datos.lorem1);
-					$( "#txt_info #dist"  ).text( rutas.norte[i1].datos.lorem2);
-					
+								function fn_rutear(resultado, status) {
+									if (status=='OK') {
+										dr.setDirections(resultado);
+									}else{
+										console.log('error al trazar ruta');
+									}
+								}
+								//
+								$( "#info img" ).attr( "src", rutas.norte[i1].imagen );
+								//$( "p" ).text( "<b>Some</b> new text." );
+								
+								$( "#txt_info #nombreruta"  ).text( rutas.norte[i1].datos.n_ruta);
+								$( "#txt_info #ubi"  ).text( rutas.norte[i1].datos.nombre);
+								$( "#txt_info #zona"  ).text( rutas.norte[i1].datos.lorem1);
+								$( "#txt_info #dist"  ).text( rutas.norte[i1].datos.lorem2);
+								
 
-				}
-			
+							}
+						
 
-//-------------------------------------------------------------------
+			//-------------------------------------------------------------------
 
 		}else if (latitudx < latgeo) {
 			//alert('vas al sur');
 			medirSur(latitudx,longitudx);
-//-------------------------------------------------------------------
-	//GRAFICANDO LAS RUTAS POR MEDIO DE LOS IF
+			//-------------------------------------------------------------------
+				//GRAFICANDO LAS RUTAS POR MEDIO DE LOS IF
 
-			//guardando los nombres de las rutas en los i's
-			
-			var i1 = (localStorage.getItem('nombre_1'));
+						//guardando los nombres de las rutas en los i's
+						
+						var i1 = (localStorage.getItem('nombre_1'));
 
-			
-			
-				if (b1 == 1) {// es la b1 es la bandera que cuenta los clicks y segun a ello grafica la ruta
-					//console.log('del local es '+i1);
+						
+						
+							if (b1 == 1) {// es la b1 es la bandera que cuenta los clicks y segun a ello grafica la ruta
+								//console.log('del local es '+i1);
 
-					var objConfDR = { 
-					map: mapa,
-					suppressMarkers: true
-					}
-					var destino = rutas.sur[i1].final;
-					
-					var objConfDS = {
-						origin:rutas.sur[i1].inicio,
-						destination: destino,
-						waypoints:rutas.sur[i1].waypts,
-						travelMode: google.maps.TravelMode.WALKING
-					}
+								var objConfDR = { 
+								map: mapa,
+								suppressMarkers: true
+								}
+								var destino = rutas.sur[i1].final;
+								
+								var objConfDS = {
+									origin:rutas.sur[i1].inicio,
+									destination: destino,
+									waypoints:rutas.sur[i1].waypts,
+									travelMode: google.maps.TravelMode.WALKING
+								}
 
-					var ds = new google.maps.DirectionsService();
+								var ds = new google.maps.DirectionsService();
 
-					var dr = new google.maps.DirectionsRenderer(objConfDR);
+								var dr = new google.maps.DirectionsRenderer(objConfDR);
 
-					ds.route(objConfDS, fn_rutear);
+								ds.route(objConfDS, fn_rutear);
 
-					function fn_rutear(resultado, status) {
-						if (status=='OK') {
-							dr.setDirections(resultado);
-						}else{
-							console.log('error al trazar ruta');
-						}
-					}
-					//
-					$( "#info img" ).attr( "src", rutas.sur[i1].imagen );
-					//$( "p" ).text( "<b>Some</b> new text." );
-					
-					$( "#txt_info #nombreruta"  ).text( rutas.sur[i1].datos.n_ruta);
-					$( "#txt_info #ubi"  ).text( rutas.sur[i1].datos.nombre);
-					$( "#txt_info #zona"  ).text( rutas.sur[i1].datos.lorem1);
-					$( "#txt_info #dist"  ).text( rutas.sur[i1].datos.lorem2);
-					
+								function fn_rutear(resultado, status) {
+									if (status=='OK') {
+										dr.setDirections(resultado);
+									}else{
+										console.log('error al trazar ruta');
+									}
+								}
+								//
+								$( "#info img" ).attr( "src", rutas.sur[i1].imagen );
+								//$( "p" ).text( "<b>Some</b> new text." );
+								
+								$( "#txt_info #nombreruta"  ).text( rutas.sur[i1].datos.n_ruta);
+								$( "#txt_info #ubi"  ).text( rutas.sur[i1].datos.nombre);
+								$( "#txt_info #zona"  ).text( rutas.sur[i1].datos.lorem1);
+								$( "#txt_info #dist"  ).text( rutas.sur[i1].datos.lorem2);
+								
 
-				}
-			
+							}
+						
 
-//-------------------------------------------------------------------
+			//-------------------------------------------------------------------
 
 		}
 
@@ -494,11 +494,11 @@ var rutas ={
 									{location: new google.maps.LatLng(-12.057841900472331,-75.2040284872055)},
 									{location: new google.maps.LatLng(-12.06001376217287,-75.20446836948395)},
 									{location: new google.maps.LatLng(-12.064440318844069,-75.20235747098923)},
+									{location: new google.maps.LatLng(-12.0686357,-75.21029759999999)},
 									{location: new google.maps.LatLng(-12.070278980799063,-75.21363884210587)},
 									{location: new google.maps.LatLng(-12.071114113884203,-75.21683871746063)},
 									{location: new google.maps.LatLng(-12.073044562900256,-75.22020757198334)},
-									{location: new google.maps.LatLng(-12.075405147409509,-75.22467076778412)},
-									{location: new google.maps.LatLng(-12.077283108670045,-75.22809326648712)}
+									{location: new google.maps.LatLng(-12.075405147409509,-75.22467076778412)}
 								],
 						imagen: "https://c2.staticflickr.com/6/5808/31031624985_f561a6522f_z.jpg",
 						datos: 	{
