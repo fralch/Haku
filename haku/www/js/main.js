@@ -79,7 +79,7 @@ function fn_ok(rta) {
 		}
 
 		if (latitudx > latgeo) {
-			//alert('vas al norte');
+			console.log('vas al norte');
 			medirNorte(latitudx,longitudx);
 			//-------------------------------------------------------------------
 				//GRAFICANDO LAS RUTAS POR MEDIO DE LOS IF
@@ -135,7 +135,7 @@ function fn_ok(rta) {
 			//-------------------------------------------------------------------
 
 		}else if (latitudx < latgeo) {
-			//alert('vas al sur');
+			console.log('vas al sur');
 			medirSur(latitudx,longitudx);
 			//-------------------------------------------------------------------
 				//GRAFICANDO LAS RUTAS POR MEDIO DE LOS IF
@@ -479,6 +479,30 @@ var rutas ={
 									lorem1: 'Cullpa Alta',
 									lorem2: 'Huancayo',
 								}
+						  },// fin 
+					//---------------------------------------------------------
+
+					//---------------------------------------------------------
+					chasqui: {//inicio
+						inicio: {lat:-12.040499951766272, lng:-75.19325137138367},
+						final: {lat: -12.023415021425853, lng: -75.23905813694},
+						waypts: [ //el numero de waypoints maximo es 8
+									{location: new google.maps.LatLng(-12.062027178247305,-75.20857483148575)},
+									{location: new google.maps.LatLng(-12.045607800328213,-75.21765410900116)},
+									{location: new google.maps.LatLng(-12.041335177559377,-75.2224338054657)},
+									{location: new google.maps.LatLng(-12.043404344441962,-75.22587239742279)},
+									{location: new google.maps.LatLng(-12.03753886550081,-75.22968113422394)},
+									{location: new google.maps.LatLng(-12.031033175408929,-75.23397266864777)},//
+									{location: new google.maps.LatLng(-12.027087711824178,-75.23656904697418)},
+									{location: new google.maps.LatLng(-12.023415021425853,-75.23905813694)}
+								],
+						imagen: "https://c2.staticflickr.com/6/5515/31398869625_96b0c73efe_z.jpg",
+						datos: 	{
+									n_ruta: 'TC-06  San Carlos',
+									nombre: 'Tambo',
+									lorem1: 'San Carlos',
+									lorem2: 'Huancayo',
+								}
 						  }// fin 
 					//---------------------------------------------------------
 
@@ -645,6 +669,29 @@ var rutas ={
 									nombre: 'Saños Grande',
 									lorem1: 'Punta',
 									lorem2: 'El Tambo',
+								}
+						  },// fin 
+					//---------------------------------------------------------		
+					//----------------------------------------------------
+					B: {//inicio
+						inicio: {lat: -12.040395023687015, lng:-75.19288659095764},
+						final: {lat: -12.080319293293782, lng: -75.22973746061325},
+						waypts: [ //el numero de waypoints maximo es 8
+									{location: new google.maps.LatLng(-12.060951749675294,-75.20772725343704)},
+									{location: new google.maps.LatLng(-12.06587193094503,-75.20511880517006)},
+									{location: new google.maps.LatLng(-12.06741422313281,-75.20782247185707)},
+									{location: new google.maps.LatLng(-12.068500117410059,-75.20729944109917)},
+									{location: new google.maps.LatLng(-12.070066000685378,-75.20917430520058)},
+									{location: new google.maps.LatLng(-12.07230910600805,-75.21324723958969)},
+									{location: new google.maps.LatLng(-12.076202496339,-75.22032558917999)},
+									{location: new google.maps.LatLng(-12.080319293293782,-75.22973746061325)}
+								],
+						imagen: "https://c2.staticflickr.com/6/5604/31398698545_52dc2e5555_z.jpg",
+						datos: 	{
+									n_ruta: 'B - San Carlos',
+									nombre: 'San Carlos',
+									lorem1: 'Cajas Chico',
+									lorem2: 'Huancayo',
 								}
 						  },// fin 
 					//---------------------------------------------------------		
